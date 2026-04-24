@@ -6,6 +6,8 @@ Câu A1:
     Bước 4: Response chạy ngược lại : cáp quang->VNPT->router->laptop
     Bước 5: Chorme nhận HTML,CSS,JS->render giao diện -> Bạn thấy Product Feed
 
+
+
 Câu A2:
 - Do Google sẽ khó hiểu nội dung div giống như một chiếc hộp và nếu ta gõ <div = header> thì google sẽ phải đoán xem đây có phải là header không
 
