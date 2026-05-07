@@ -126,5 +126,61 @@ Inline > Internal ≈ External
 - Descendant selector: `header nav ul`, `header nav ul li a`, `#skills-table tbody tr:nth-child(even)`
 - Pseudo-class selector: `a:hover`, `header nav ul li a.active`, `#skills-table tbody tr:hover`, `#skills-table tbody tr:nth-child(even)`
 
+---
+## Box Model Lab — boxmodel_lab.html
+
+### Phần 1 — content-box vs border-box
+
+**Cách thực hiện:**
+1. Mở file `boxmodel_lab.html` trong trình duyệt
+2. Nhấn F12 để mở DevTools
+3. Chọn Inspector (mũi tên) → Click vào Hộp 1 (content-box)
+4. Xem tab "Computed" → Cuộn tìm "box-sizing: content-box"
+5. Xem "Box Model diagram" để đo chiều rộng thực tế (border-to-border)
+6. Ghi lại chiều rộng
+7. Lặp lại cho Hộp 2 (border-box)
+
+**Kết quả đo đạc:**
+- Hộp 1 (content-box): chiều rộng thực tế = **350px**
+  - Tính toán: 300px (content) + 20px*2 (padding) + 5px*2 (border) = 350px
+- Hộp 2 (border-box): chiều rộng thực tế = **300px**
+  - Tính toán: 300px (toàn bộ, đã bao gồm padding + border)
+
+**Giải thích sự khác biệt:**
+- `content-box` (mặc định): width chỉ tính phần content. Padding và border được thêm ngoài, làm tổng kích thước lớn hơn width được khai báo.
+- `border-box`: width bao gồm cả content, padding, và border. Kích thước thực tế bằng đúng width được khai báo.
+
+**Ứng dụng thực tế:**
+- `border-box` dễ tính toán layout, được khuyến khích dùng cho responsive design.
+- CSS reset thường chứa `* { box-sizing: border-box; }` để đơn giản hóa.
+
+---
+### Phần 2 — Layout 3 cột
+
+**Tình huống 1: KHÔNG dùng border-box (Lỗi)**
+```
+Cột trái: 250px + 15px*2 padding = 280px
+Cột giữa: 500px + 20px*2 padding = 540px
+Cột phải: 250px + 15px*2 padding = 280px
+---
+Tổng: 280 + 540 + 280 = 1100px > 1000px container
+❌ Cột phải bị xuống hàng
+```
+
+**Tình huống 2: Dùng border-box (Đúng)**
+```
+Cột trái: 250px (padding đã bao gồm)
+Cột giữa: 500px (padding đã bao gồm)
+Cột phải: 250px (padding đã bao gồm)
+---
+Tổng: 250 + 500 + 250 = 1000px = container
+✓ Layout hoàn hảo
+```
+
+**Kết luận:**
+- `box-sizing: border-box` là tuyệt vời cho layout, đặc biệt khi có padding/border
+- Nên áp dụng `* { box-sizing: border-box; }` ở đầu CSS để tránh các vấn đề layout
+
+
 * Có `!important`
   → Rule đó thắng
