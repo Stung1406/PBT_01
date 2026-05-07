@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nguyễn Sơn Tùng</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <header id="main-header">
         <nav>
-            <a href="#Thông tin cá nhân">Thông tin cá nhân</a>
-            <a href="#Điểm số">Điểm số</a>
-            <a href="#Cập nhật thông tin">Cập nhật thông tin</a>
+            <ul>
+                <li><a class="active" href="#about">Thông tin cá nhân</a></li>
+                <li><a href="#skills">Điểm số</a></li>
+                <li><a href="#contact">Cập nhật thông tin</a></li>
+            </ul>
         </nav>
     </header>
     <main>
-        <section class = "Về tôi">
+        <section id="about" class="about">
             <article>
                 <p>
                     Xin chào tôi là Nguyễn Sơn Tùng đang theo học ngành hệ thống thông tin của Trường Đại Học Thủy Lợi
@@ -25,8 +28,8 @@
                 <figcaption>Ảnh đại diện của tôi</figcaption>
             </figure>
         </section>
-        <section class = "Kỹ năng">
-            <table>
+        <section id="skills" class="skills">
+            <table id="skills-table">
                 <thead>
                     <tr>
                         <th>Kỹ năng</th>
@@ -78,13 +81,13 @@
                 </tfoot>
             </table>
         </section>
-        <aside class = "Thông tin liên hệ">
+        <aside id="contact" class="contact-info">
             <p>SDT : 0378140606</p>
             <p>Email: tung323123@gmail.com</p>
         </aside>
     </main>
     <footer>
-        <p>&copy Nguyễn Sơn Tùng đẹp trai phiphai</p>
+        <p>&copy; Nguyễn Sơn Tùng - Cố gắng học tốt CSS</p>
     </footer>
 </body>
 </html>

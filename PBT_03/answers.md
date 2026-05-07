@@ -117,5 +117,14 @@ Inline > Internal ≈ External
 <p style="color: orange;">
 ```
 → **Cam**
+
+---
+## PBT_03 — Selectors đã dùng trong `profile.html`
+- Element selector: `body`, `header`, `main`, `table`, `footer`, `img`
+- Class selector: `.active`, `.about`, `.skills`, `.contact-info`
+- ID selector: `#main-header`, `#about`, `#skills`, `#contact`, `#skills-table`
+- Descendant selector: `header nav ul`, `header nav ul li a`, `#skills-table tbody tr:nth-child(even)`
+- Pseudo-class selector: `a:hover`, `header nav ul li a.active`, `#skills-table tbody tr:hover`, `#skills-table tbody tr:nth-child(even)`
+
 * Có `!important`
   → Rule đó thắng
