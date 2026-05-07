@@ -184,3 +184,102 @@ Tổng: 250 + 500 + 250 = 1000px = container
 
 * Có `!important`
   → Rule đó thắng
+
+---
+
+## Bài B3 — Specificity Battle
+
+### 1. 10 CSS Rules và Specificity Scores
+
+| # | CSS Rule | Specificity | Màu Hiển Thị | Giải Thích |
+|---|----------|------------|--------------|-----------|
+| 1 | `p { }` | 0,0,1 | red | 1 element selector |
+| 2 | `body p { }` | 0,0,2 | orange | 2 element selectors (descendant) |
+| 3 | `.text { }` | 0,1,0 | yellow | 1 class selector |
+| 4 | `p.text { }` | 0,1,1 | lime | 1 element + 1 class |
+| 5 | `.text.highlight { }` | 0,2,0 | cyan | 2 class selectors |
+| 6 | `p.text.highlight { }` | 0,2,1 | blue | 1 element + 2 classes |
+| 7 | `#demo { }` | 1,0,0 | purple | 1 ID selector |
+| 8 | `p#demo { }` | 1,0,1 | brown | 1 ID + 1 element |
+| 9 | `#demo.text { }` | 1,1,0 | pink | 1 ID + 1 class |
+| 10 | `#demo.text.highlight { }` | **1,2,0** | **darkgreen** | **1 ID + 2 classes (HIGHEST)** |
+
+### 2. Element Cuối Cùng Hiển Thị Màu Gì? Tại Sao?
+
+**Màu Hiển Thị: Dark Green**
+
+**Lý Do:**
+- Element `<p id="demo" class="text highlight">Hello World</p>` khớp với tất cả 10 CSS rules
+- CSS Cascade (Tầng xếp) quy tắc: **Specificity cao nhất thắng**
+- Rule #10 có specificity cao nhất: `1,2,0` (1 ID selector + 2 class selectors)
+- Do đó, `color: darkgreen;` từ rule #10 được áp dụng
+- Các rule có specificity thấp hơn (như rule #1, #2, #3, etc.) đều bị ghi đè (override)
+
+**Quy Luật So Sánh Specificity (a,b,c):**
+- a = số ID selectors
+- b = số class/attribute/pseudo-class selectors
+- c = số element/pseudo-element selectors
+- So sánh từ trái sang phải: **1 ID > 100 classes, 1 class > 100 elements**
+
+**Ví Dụ So Sánh:**
+```
+1,0,0 > 0,9,9   ✓ (Vì 1 > 0 ở vị trí ID)
+0,2,0 > 0,1,99  ✓ (Vì 2 > 1 ở vị trí class)
+0,1,0 > 0,0,99  ✓ (Vì 1 > 0 ở vị trí class)
+```
+
+### 3. Screenshot Kết Quả
+
+Text "Hello World" hiển thị màu **dark green** theo đúng dự tính từ rule có specificity cao nhất.
+
+### 4. Thay Đổi Thứ Tự Rules trong CSS — Kết Quả Có Đổi Không?
+
+**Câu Trả Lời: KHÔNG**
+
+**Giải Thích Chi Tiết:**
+
+CSS Cascade có 2 yếu tố quyết định rule nào được áp dụng:
+1. **Specificity** (Độ cụ thể) — **QUAN TRỌNG NHẤT**
+2. **Source Order** (Thứ tự khai báo) — Chỉ khi specificity bằng nhau
+
+Trong bài tập này, **tất cả 10 rules đều có specificity KHÁC NHAU**:
+```
+0,0,1 < 0,0,2 < 0,1,0 < 0,1,1 < 0,2,0 < 0,2,1 < 1,0,0 < 1,0,1 < 1,1,0 < 1,2,0
+```
+
+**Vì specificity cao nhất là 1,2,0, nên rule này LUÔN thắng** bất kể đặt ở vị trí nào trong file CSS.
+
+**Ví Dụ:**
+- Nếu di chuyển rule #10 (`#demo.text.highlight`) lên đầu file → Text vẫn **dark green** ✓
+- Nếu di chuyển rule #1 (`p`) xuống cuối file → Text vẫn **dark green** ✓
+
+**Source Order chỉ ảnh hưởng khi specificity bằng nhau:**
+
+```css
+.text { color: yellow; }    /* Specificity: 0,1,0 */
+.text { color: blue; }      /* Specificity: 0,1,0 - Rule này thắng vì ở sau */
+```
+Trong trường hợp này, text sẽ hiển thị **blue** (rule thứ 2).
+
+```css
+#demo.text { color: pink; }         /* Specificity: 1,1,0 */
+#demo.text.highlight { color: darkgreen; }  /* Specificity: 1,2,0 - Rule này LUÔN thắng */
+```
+Trong trường hợp này, text sẽ hiển thị **dark green** (rule có specificity cao hơn), bất kể thứ tự.
+
+### 5. Kết Luận
+
+**CSS Specificity là yếu tố QUY ĐỊNH trong CSS Cascade, không phải thứ tự khai báo.**
+
+Hiểu rõ specificity giúp viết CSS hiệu quả hơn và tránh những bug khó sửa như:
+- Styles không được áp dụng như mong đợi
+- Phải dùng `!important` (anti-pattern)
+- CSS override không hoạt động
+
+**Thứ Tự Ưu Tiên Trong CSS Cascade:**
+1. `!important` (cấm dùng trong production)
+2. Inline styles (`<p style="">`) — 1,0,0
+3. ID selectors (`#`) — 1,0,0
+4. Class/Attribute/Pseudo-class selectors (`.`, `[attr]`, `:hover`)
+5. Element/Pseudo-element selectors (`p`, `div`, `::before`)
+6. Universal selector (`*`) — Specificity 0,0,0

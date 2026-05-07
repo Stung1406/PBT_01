@@ -1,0 +1,61 @@
+/* CSS Specificity Battle - RULES IN REVERSE ORDER (to demonstrate specificity > order) */
+
+/* Rule 10: ID selector + two classes (HIGHEST SPECIFICITY) - MOVED TO BEGINNING */
+#demo.text.highlight { 
+    color: darkgreen; 
+    /* Specificity: 1,2,0 */
+}
+
+/* Rule 9: ID selector + single class */
+#demo.text { 
+    color: pink; 
+    /* Specificity: 1,1,0 */
+}
+
+/* Rule 8: Element + ID selector */
+p#demo { 
+    color: brown; 
+    /* Specificity: 1,0,1 */
+}
+
+/* Rule 7: ID selector */
+#demo { 
+    color: purple; 
+    /* Specificity: 1,0,0 */
+}
+
+/* Rule 6: Element + two classes */
+p.text.highlight { 
+    color: blue; 
+    /* Specificity: 0,2,1 */
+}
+
+/* Rule 5: Two class selectors */
+.text.highlight { 
+    color: cyan; 
+    /* Specificity: 0,2,0 */
+}
+
+/* Rule 4: Element + single class */
+p.text { 
+    color: lime; 
+    /* Specificity: 0,1,1 */
+}
+
+/* Rule 3: Single class selector */
+.text { 
+    color: yellow; 
+    /* Specificity: 0,1,0 */
+}
+
+/* Rule 2: Element selector with descendant - MOVED TO END */
+body p { 
+    color: orange; 
+    /* Specificity: 0,0,2 */
+}
+
+/* Rule 1: Element selector */
+p { 
+    color: red; 
+    /* Specificity: 0,0,1 */
+}
