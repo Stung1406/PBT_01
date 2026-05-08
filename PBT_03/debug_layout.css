@@ -1,0 +1,126 @@
+/* Debug CSS Layout - C1 */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    margin-top: 40px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    color: #007bff;
+}
+
+.explanation {
+    background-color: #fff3cd;
+    padding: 10px;
+    border-left: 4px solid #ffc107;
+    margin: 10px 0;
+}
+
+.explanation-box {
+    background-color: #e7f3ff;
+    padding: 20px;
+    border-left: 4px solid #007bff;
+    margin: 20px 0;
+}
+
+.explanation-box pre {
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 10px 0;
+}
+
+/* ============= CÁCH 1: border-box ============= */
+.container.method1 {
+    width: 960px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 10px;
+    border: 2px solid #28a745;
+}
+
+.sidebar.method1 {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    float: left;
+    background-color: #e8f5e9;
+    box-sizing: border-box; /* KHÓ CHÌA KHÓA */
+}
+
+.content.method1 {
+    width: 660px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    float: left;
+    background-color: #f0f7ff;
+    box-sizing: border-box; /* KHÓ CHÌA KHÓA */
+}
+
+/* ============= CÁCH 2: Không dùng border-box ============= */
+.container.method2 {
+    width: 960px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 10px;
+    border: 2px solid #fd7e14;
+}
+
+.sidebar.method2 {
+    /* Tính: 300 - (20+20+1+1) = 258px */
+    width: 258px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    float: left;
+    background-color: #fff3e0;
+    /* box-sizing không được dùng */
+}
+
+.content.method2 {
+    /* Tính: 660 - (30+30+1+1) = 598px */
+    width: 598px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    float: left;
+    background-color: #fce4ec;
+    /* box-sizing không được dùng */
+}
+
+.clearfix {
+    clear: both;
+}
+
+/* Responsive: trên màn hình nhỏ */
+@media (max-width: 768px) {
+    .container.method1,
+    .container.method2 {
+        width: 100%;
+    }
+
+    .sidebar.method1,
+    .sidebar.method2 {
+        width: 100%;
+        float: none;
+        margin-bottom: 20px;
+    }
+
+    .content.method1,
+    .content.method2 {
+        width: 100%;
+        float: none;
+    }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug CSS Layout - C1</title>
+    <link rel="stylesheet" href="debug_layout.css">
+</head>
+<body>
+    <h1>C1 - Debug CSS Layout</h1>
+    
+    <!-- CÁCH 1: Dùng border-box -->
+    <h2>Cách 1: Sử dụng box-sizing: border-box</h2>
+    <p class="explanation">Width bây giờ BẰNG width + padding + border</p>
+    <div class="container method1">
+        <div class="sidebar method1">
+            <h3>Sidebar</h3>
+            <p>Width: 300px</p>
+            <p>Padding: 20px</p>
+            <p>Border: 1px</p>
+            <p><strong>Thực tế: 300px (đã bao gồm)</strong></p>
+        </div>
+        <div class="content method1">
+            <h3>Content</h3>
+            <p>Width: 660px</p>
+            <p>Padding: 30px</p>
+            <p>Border: 1px</p>
+            <p><strong>Thực tế: 660px (đã bao gồm)</strong></p>
+            <p>Total: 300px + 660px = 960px ✓</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <!-- CÁCH 2: Không dùng border-box, điều chỉnh width -->
+    <h2>Cách 2: Không dùng box-sizing, giảm width để fit</h2>
+    <p class="explanation">Tính toán lại width để vừa với container</p>
+    <div class="container method2">
+        <div class="sidebar method2">
+            <h3>Sidebar</h3>
+            <p>Width: 258px (300 - 42)</p>
+            <p>Padding: 20px</p>
+            <p>Border: 1px</p>
+            <p><strong>Thực tế: 300px</strong></p>
+        </div>
+        <div class="content method2">
+            <h3>Content</h3>
+            <p>Width: 598px (660 - 62)</p>
+            <p>Padding: 30px</p>
+            <p>Border: 1px</p>
+            <p><strong>Thực tế: 660px</strong></p>
+            <p>Total: 300px + 660px = 960px ✓</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <!-- Giải thích chi tiết -->
+    <h2>Giải Thích Chi Tiết</h2>
+    <div class="explanation-box">
+        <h3>Vấn đề Gốc:</h3>
+        <pre>
+Sidebar: 300 + 20 + 20 + 1 + 1 = 342px
+Content: 660 + 30 + 30 + 1 + 1 = 752px
+Tổng: 1094px > 960px (container) → Content bị đẩy xuống!</pre>
+
+        <h3>Cách 1 - border-box (Hiện đại):</h3>
+        <pre>
+box-sizing: border-box;
+→ Width = width + padding + border
+Sidebar: 300px (thực tế)
+Content: 660px (thực tế)
+Tổng: 960px ✓</pre>
+
+        <h3>Cách 2 - Tính toán manual:</h3>
+        <pre>
+Sidebar: 300px - (20+20+1+1) = 258px width
+Content: 660px - (30+30+1+1) = 598px width
+Thực tế:
+  Sidebar: 258 + 42 = 300px
+  Content: 598 + 62 = 660px
+Tổng: 960px ✓</pre>
+    </div>
+</body>
+</html>

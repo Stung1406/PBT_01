@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cascade Puzzle - C2</title>
+    <style>
+        body { 
+            font-size: 16px; 
+            color: #333;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container { 
+            font-size: 14px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card { 
+            color: blue;
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .card .title { 
+            font-size: 20px;
+            margin-top: 0;
+        }
+
+        .card p { 
+            color: inherit;
+        }
+
+        #featured .title { 
+            color: red;
+        }
+
+        .highlight { 
+            color: green !important;
+        }
+
+        /* Thêm styles để dễ nhìn */
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .answer {
+            background-color: #fff3cd;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+
+        .answer h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+
+        .analysis {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #004085;
+            border-radius: 4px;
+            color: #004085;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .info-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .info-item {
+            background-color: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .info-item strong {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>C2 - Cascade Puzzle</h1>
+
+    <div class="container">
+        <div class="card" id="featured">
+            <h2 class="title highlight">Sản phẩm A</h2>
+            <p>Mô tả sản phẩm</p>
+        </div>
+        <div class="card">
+            <h2 class="title">Sản phẩm B</h2>
+            <p class="highlight">Mô tả sản phẩm B</p>
+        </div>
+    </div>
+
+    <!-- CÂU TRẢ LỜI -->
+    <div class="container" style="margin-top: 40px;">
+        <h2>Trả Lời Các Câu Hỏi</h2>
+
+        <div class="answer">
+            <h3>❌ Câu 1: "Sản phẩm A" (h2) - font-size & color?</h3>
+            <p><strong>Trả lời: font-size = 20px, color = green</strong></p>
+        </div>
+
+        <div class="analysis">
+            <h4>📖 Giải Thích Chi Tiết (Cascade & Inheritance):</h4>
+            <p><strong>Font-size:</strong></p>
+            <ul>
+                <li><code>body</code>: 16px (giá trị ban đầu)</li>
+                <li><code>.container</code>: 14px (kế thừa - phần tử con của body)</li>
+                <li><code>.card .title</code>: 20px (SPECIFICITY CAO HƠN - selector "element.class > element")</li>
+                <li>✅ <strong>Kết quả: 20px</strong> (`.card .title` cụ thể hơn, nó chiến thắng)</li>
+            </ul>
+            <p><strong>Color:</strong></p>
+            <ul>
+                <li><code>body</code>: #333 (giá trị ban đầu)</li>
+                <li><code>.card</code>: blue (phần tử cha có class)</li>
+                <li><code>#featured .title</code>: red (ID selector - specificity cao: 1,0,0)</li>
+                <li><code>.highlight</code>: green <code>!important</code> (SPECIFICITY CAO NHẤT với !important)</li>
+                <li>✅ <strong>Kết quả: green</strong> (!important luôn thắng nếu không có !important khác cụ thể hơn)</li>
+            </ul>
+        </div>
+
+        <div class="answer">
+            <h3>❌ Câu 2: "Mô tả sản phẩm" (p trong #featured) - color?</h3>
+            <p><strong>Trả lời: color = blue</strong></p>
+        </div>
+
+        <div class="analysis">
+            <h4>📖 Giải Thích Chi Tiết:</h4>
+            <p><strong>Color:</strong></p>
+            <ul>
+                <li><code>body</code>: #333 (mặc định)</li>
+                <li><code>.card</code>: blue (được set trên phần tử cha)</li>
+                <li><code>.card p</code>: <code>color: inherit</code> (INHERIT từ phần tử cha = .card)</li>
+                <li>⚠️ <strong>Không có:</strong> #featured selector cho p, không có .highlight class</li>
+                <li>✅ <strong>Kết quả: blue</strong> (kế thừa từ .card xanh da trời)</li>
+            </ul>
+        </div>
+
+        <div class="answer">
+            <h3>❌ Câu 3: "Sản phẩm B" (h2) - font-size & color?</h3>
+            <p><strong>Trả lời: font-size = 20px, color = blue</strong></p>
+        </div>
+
+        <div class="analysis">
+            <h4>📖 Giải Thích Chi Tiết:</h4>
+            <p><strong>Font-size:</strong></p>
+            <ul>
+                <li>Giống "Sản phẩm A" vì cùng selector <code>.card .title</code></li>
+                <li>✅ <strong>Kết quả: 20px</strong></li>
+            </ul>
+            <p><strong>Color:</strong></p>
+            <ul>
+                <li><code>.card</code>: blue (phần tử cha)</li>
+                <li><code>#featured .title</code>: red (NHƯ NG KHÔNG ĐƯỢC APPLY - h2 này KHÔNG trong #featured)</li>
+                <li><code>.highlight</code>: (h2 này KHÔNG có class highlight)</li>
+                <li>✅ <strong>Kết quả: blue</strong> (kế thừa từ .card)</li>
+            </ul>
+        </div>
+
+        <div class="answer">
+            <h3>❌ Câu 4: "Mô tả sản phẩm B" (p.highlight) - color?</h3>
+            <p><strong>Trả lời: color = green</strong></p>
+        </div>
+
+        <div class="analysis">
+            <h4>📖 Giải Thích Chi Tiết:</h4>
+            <p><strong>Color:</strong></p>
+            <ul>
+                <li><code>.card p</code>: <code>color: inherit</code> → kế thừa blue từ .card</li>
+                <li><code>.highlight</code>: <code>color: green !important</code> (DIRECT CSS - không phải kế thừa)</li>
+                <li>⚠️ <strong>Quy tắc Cascade:</strong> Direct CSS luôn hơn inherited CSS</li>
+                <li>⚠️ <strong>!important</strong> làm cho green chiến thắng cả over inherited blue</li>
+                <li>✅ <strong>Kết quả: green</strong> (!important & direct style > inherited style)</li>
+            </ul>
+        </div>
+
+        <h2 style="margin-top: 40px;">Bảng Tóm Tắt Specificity</h2>
+        <div class="info-box">
+            <div class="info-item">
+                <strong>Element: 0,0,1</strong><br>
+                VD: p, h2, div
+            </div>
+            <div class="info-item">
+                <strong>Class: 0,1,0</strong><br>
+                VD: .highlight, .title
+            </div>
+            <div class="info-item">
+                <strong>ID: 1,0,0</strong><br>
+                VD: #featured
+            </div>
+            <div class="info-item">
+                <strong>!important: ∞</strong><br>
+                Luôn thắng (nếu không có !important khác cụ thể hơn)
+            </div>
+        </div>
+
+        <div class="analysis">
+            <h4>🎯 Cascade Order (từ thấp đến cao):</h4>
+            <ol>
+                <li><strong>Inherited CSS</strong> (từ phần tử cha)</li>
+                <li><strong>Default browser CSS</strong></li>
+                <li><strong>Element selector</strong> (0,0,1)</li>
+                <li><strong>Class selector</strong> (0,1,0)</li>
+                <li><strong>ID selector</strong> (1,0,0)</li>
+                <li><strong>Inline style</strong> (1,0,0,0)</li>
+                <li><strong>!important</strong> (nếu có)</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
