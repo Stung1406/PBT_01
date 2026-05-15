@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Positioning Playground</title>
+	<link rel="stylesheet" href="positioning.css">
+</head>
+<body>
+	
+	<header class="header">
+		<div class="logo">LOGO</div>
+		<nav class="nav">
+			<a href="#">Trang chủ</a>
+			<a href="#">Sản phẩm</a>
+			<a href="#">Liên hệ</a>
+		</nav>
+	</header>
+
+	<div class="container">
+		
+		<aside class="sidebar">
+			<ul>
+				<li>Menu 1</li>
+				<li>Menu 2</li>
+				<li>Menu 3</li>
+			</ul>
+		</aside>
+
+		
+		<main class="main-content">
+			<div class="product-card">
+				<span class="badge-hot">HOT</span>
+				<img src="https://via.placeholder.com/200x120" alt="Product">
+				<h3>Sản phẩm 1</h3>
+				<p>Giá: 100.000đ</p>
+			</div>
+			<div class="product-card">
+				<span class="badge-hot">HOT</span>
+				<img src="https://via.placeholder.com/200x120" alt="Product">
+				<h3>Sản phẩm 2</h3>
+				<p>Giá: 200.000đ</p>
+			</div>
+		</main>
+	</div>
+
+	
+	<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+</body>
+</html>
